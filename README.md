@@ -14,3 +14,9 @@ passes the opts object to child_process.spawn.
 
 Both arguments are optional. If you only want to use the opts object, pass an
 empty array for args.
+
+### runElectron.rerun
+For gulp.watch, exits Electron and opens it again; use like so:
+```js
+gulp.watch("files/*", ["files", runElectron.rerun]);
+```
