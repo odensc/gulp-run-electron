@@ -59,7 +59,7 @@ module.exports = function(_args, _opts)
 	});
 };
 
-module.exports.rerun = function()
+module.exports.rerun = function(cb)
 {
-	spawn(function() {});
+	spawn(cb || function() {});
 };
