@@ -1,10 +1,10 @@
 {
   "name": "gulp-run-electron",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Gulp plugin for starting Electron.",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd test && gulp"
   },
   "repository": {
     "type": "git",
@@ -18,19 +18,18 @@
     "webkit",
     "iojs"
   ],
-  "author": "Oden <oden@thesbros.me>",
-  "license": "Apache 2.0",
+  "author": "Oden <ops991923 [at] gmail.com>",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/thesbros/gulp-run-electron/issues"
   },
   "homepage": "https://github.com/thesbros/gulp-run-electron",
   "dependencies": {
     "electron-prebuilt": "*",
-    "gulp-util": "^3.0.4",
-    "through2": "^1.1.1"
+    "gulp-util": "^3.0.6",
+    "through2": "^2.0.0"
   },
   "devDependencies": {
-    "chai": "^2.3.0",
-    "mocha": "^2.2.4"
+    "gulp": "^3.9.0"
   }
 }
