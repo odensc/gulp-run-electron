@@ -61,5 +61,7 @@ module.exports = function(_args, _opts)
 
 module.exports.rerun = function(cb)
 {
-	spawn(cb || function() {});
+	// gulp might pass watch function an argument with file changes, so check
+	// if cb is really a function, or just an object / undefined
+	spawn(typeof cb === "function" ? cb : function() {});
 };
