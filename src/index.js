@@ -10,15 +10,6 @@ var file = null;
 
 function spawn(cb)
 {
-	function done(err)
-	{
-		if (!called)
-		{
-			cb(null, file);
-			called = true;
-		}
-	}
-
 	if (child) child.kill();
 
 	if (!file.isDirectory())
@@ -27,31 +18,23 @@ function spawn(cb)
 		return;
 	}
 
-	var called = false;
-	child = proc.spawn(electron, (args || []).concat(file.path), opts || {});
+	var errored = false;
+	child = proc.spawn(electron, args.concat(file.path), opts);
 	child.on("error", function(err)
 	{
-		done(new gutil.PluginError("gulp-run-electron", err));
+		cb(new gutil.PluginError("gulp-run-electron", err));
+		errored = true;
 	});
 
-	child.stdout.on("data", function(data)
-	{
-		gutil.log("Electron:", data.toString("utf8"));
-		done(null);
-	});
-
-	// chrome INFO goes in stderr for some reason
-	child.stderr.on("data", function(data)
-	{
-		gutil.log("Electron:", data.toString("utf8"));
-		done(null);
-	});
+	if (!errored) cb(null, file);
 }
 
 module.exports = function(_args, _opts)
 {
-	args = _args;
-	opts = _opts;
+	args = _args || [];
+	opts = _opts || {};
+	// show colors in output
+	opts.stdio = opts.stdio || "inherit";
 	return through.obj(function(_file, enc, cb)
 	{
 		file = _file;
@@ -61,7 +44,5 @@ module.exports = function(_args, _opts)
 
 module.exports.rerun = function(cb)
 {
-	// gulp might pass watch function an argument with file changes, so check
-	// if cb is really a function, or just an object / undefined
 	spawn(typeof cb === "function" ? cb : function() {});
 };
