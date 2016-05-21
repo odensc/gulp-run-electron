@@ -1,5 +1,6 @@
 # gulp-run-electron
 Gulp plugin for starting Electron.
+Requires a peer dependency of `electron-prebuilt`.
 
 ## Usage
 ```js

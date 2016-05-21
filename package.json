@@ -25,11 +25,13 @@
   },
   "homepage": "https://github.com/thesbros/gulp-run-electron",
   "dependencies": {
-    "electron-prebuilt": "*",
-    "gulp-util": "^3.0.6",
-    "through2": "^2.0.0"
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.1"
+  },
+  "peerDependencies": {
+    "electron-prebuilt": "*"  
   },
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.1"
   }
 }
