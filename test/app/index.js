@@ -13,6 +13,6 @@ app.on("ready", function()
 	{
 		mainWindow = null;
 	});
-	
+
 	console.log("Output");
 });

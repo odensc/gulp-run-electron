@@ -3,7 +3,7 @@ var runElectron = require("../src");
 
 gulp.task("watch", function()
 {
-	return gulp.watch("app/**/*", runElectron.rerun);
+	return gulp.watch("app/**/*", ["build", runElectron.rerun]);
 });
 
 gulp.task("build", function()
