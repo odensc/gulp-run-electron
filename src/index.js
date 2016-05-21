@@ -26,6 +26,16 @@ function spawn(cb)
 		errored = true;
 	});
 
+	function print(data)
+	{
+		var str = data.toString().trim();
+		if (str)
+			console.log("[electron] " + str);
+	}
+
+	child.stdout.on("data", print);
+	child.stderr.on("data", print);
+
 	if (!errored) cb(null, file);
 }
 
@@ -34,7 +44,6 @@ module.exports = function(_args, _opts)
 	args = _args || [];
 	opts = _opts || {};
 	// show colors in output
-	opts.stdio = opts.stdio || "inherit";
 	return through.obj(function(_file, enc, cb)
 	{
 		file = _file;
