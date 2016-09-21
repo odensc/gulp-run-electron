@@ -30,7 +30,7 @@ function spawn(cb)
 	{
 		var str = data.toString().trim();
 		if (str)
-			console.log("[electron] " + str);
+			gutil.log("[electron] " + str);
 	}
 
 	child.stdout.on("data", print);
