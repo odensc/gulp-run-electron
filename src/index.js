@@ -1,5 +1,5 @@
 var through = require("through2");
-var electron = require("electron-prebuilt");
+var electron = require("electron");
 var gutil = require("gulp-util");
 var proc = require("child_process");
 
