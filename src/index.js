@@ -8,8 +8,17 @@ var args = null;
 var opts = null;
 var file = null;
 
+function print(data)
+{
+	var str = data.toString().trim();
+	if (str)
+		gutil.log("[electron] " + str);
+}
+
 function spawn(cb)
 {
+	var errored = false;
+
 	if (child) child.kill();
 
 	if (!file.isDirectory())
@@ -18,20 +27,13 @@ function spawn(cb)
 		return;
 	}
 
-	var errored = false;
 	child = proc.spawn(electron, args.concat(file.path), opts);
+
 	child.on("error", function(err)
 	{
 		cb(new gutil.PluginError("gulp-run-electron", err));
 		errored = true;
 	});
-
-	function print(data)
-	{
-		var str = data.toString().trim();
-		if (str)
-			gutil.log("[electron] " + str);
-	}
 
 	child.stdout.on("data", print);
 	child.stderr.on("data", print);
@@ -43,7 +45,7 @@ module.exports = function(_args, _opts)
 {
 	args = _args || [];
 	opts = _opts || {};
-	// show colors in output
+
 	return through.obj(function(_file, enc, cb)
 	{
 		file = _file;
